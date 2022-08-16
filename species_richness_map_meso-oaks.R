@@ -1,4 +1,4 @@
-### Author: Emily Beckman Bruns
+### Author: Emily Beckman Bruns, Kate Good
 ### Date: 08/16/2022
 ### Funding: Institude of Museum and Library Services
 #   IMLS MFA program grant MA-30-18-0273-18 to The Morton Arboretum
