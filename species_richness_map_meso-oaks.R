@@ -7,10 +7,13 @@
   # Create species richness maps based on geopolitical boundaries
 
 ### INPUTS:
-	#
+	# shapefile (SpatialPolygonsDataFrame) from Natural Earth
+  # Species-List_Mesoamerica_for-R.csv
 
 ### OUTPUTS:
-	#
+	# MesoAm-Quercus-Richness_leaflet_map.html
+  # MesoAm-Threatened-Quercus-Richness_leaflet_map.html
+  # MesoAm-Endemic-Quercus-Richness_leaflet_map.html
 
 
 ################################################################################
@@ -18,19 +21,20 @@
 ################################################################################
 
 my.packages <- c("leaflet","raster","sp","rgeos","dplyr","rgdal",
-	"RColorBrewer","tidyverse","rnaturalearth")
+	"RColorBrewer","tidyverse","rnaturalearth", "rnaturalearthdata", "rnaturalhires")
 
-#install.packages(my.packages) # turn on to install current versions
+install.packages(my.packages) # turn on to install current versions
 lapply(my.packages, require, character.only=TRUE)
 rm(my.packages)
-
+install.packages("devtools")
+devtools::install_github("ropenscilabs/rnaturalearth") #will be prompted to install rnaturalearthhires
 
 ################################################################################
 # Set working directory
 ################################################################################
 
-# edit this based on the path on your computer
-main_dir <- "/Volumes/GoogleDrive-103729429307302508433/Shared drives/Global Tree Conservation Program/4. GTCP_Projects/Gap Analyses/Mesoamerican Oak Gap Analysis"
+# edit this based on the path on your computer. Changed all backslash to forward slash. Backslash was returning an error
+main_dir <- "G:/Shared drives/Global Tree Conservation Program/4. GTCP_Projects/Gap Analyses/Mesoamerican Oak Gap Analysis"
 
 
 ################################################################################
@@ -144,8 +148,8 @@ title_text <- "Mesoamerica oak species richness"
 	# look at distribution of data
 hist(ctry_richness@data$Freq,breaks=90,xlim=c(0,200),ylim=c(0,25))
 	# assign bin breaks and labels
-bins <- c(0,1,5,10,15,20,40,70,100,150,Inf)
-labels <- c("0","1-4","5-9","10-14","15-19","20-39","40-69","70-99","100-149","150+")
+bins <- c(0,1,5,10,15,20,30,40,50,Inf)
+labels <- c("0","1-4","5-9","10-14","15-19","20-29","30-39","40-49","50+")
 	# create color palette
 palette_country <- colorBin(palette = "PuRd", bins = bins,
 	domain = ctry_richness@data$Freq, reverse = F, na.color = "white")
@@ -165,8 +169,8 @@ htmlwidgets::saveWidget(map_richness, file.path(main_dir,"Species Richness Maps"
 
 hist(ctry_richness_th@data$Freq,breaks=31,xlim=c(0,40),ylim=c(0,25))
 	## the scale still needs to be optimized!
-bins <- c(0,1,2,4,5,6,15,20,30,35,Inf)
-labels <- c("0","1","2-3","4","5","6-14","15-19","20-29","30-34","35+")
+bins <- c(0,1,2,4,5,6,15,20,30,Inf)
+labels <- c("0","1","2-3","4","5","6-14","15-19","20-29","30+")
 palette_country <- colorBin(palette = "PuRd", bins = bins,
 	domain = ctry_richness_th@data$Freq, reverse = F, na.color = "white")
 
@@ -181,8 +185,8 @@ htmlwidgets::saveWidget(map_richness, file.path(main_dir,"Species Richness Maps"
 
 hist(ctry_richness_en@data$Freq,breaks=19,xlim=c(0,120),ylim=c(0,15))
 	## the scale still needs to be optimized!
-bins <- c(0,1,2,3,5,7,10,15,50,75,Inf)
-labels <- c("0","1","2","3-4","5-6","7-9","10-14","15-49","50-74","75+")
+bins <- c(0,1,2,3,5,7,10,15,50,Inf)
+labels <- c("0","1","2","3-4","5-6","7-9","10-14","15-49","50+")
 palette_country <- colorBin(palette = "PuRd", bins = bins,
 	domain = ctry_richness_en@data$Freq, reverse = F, na.color = "white")
 
