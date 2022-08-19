@@ -8,12 +8,12 @@
 
 ### INPUTS:
 	# shapefile (SpatialPolygonsDataFrame) from Natural Earth
-  # Species-List_Mesoamerica_for-R.csv
+  	# Species-List_Mesoamerica_for-R.csv
 
 ### OUTPUTS:
 	# MesoAm-Quercus-Richness_leaflet_map.html
-  # MesoAm-Threatened-Quercus-Richness_leaflet_map.html
-  # MesoAm-Endemic-Quercus-Richness_leaflet_map.html
+  	# MesoAm-Threatened-Quercus-Richness_leaflet_map.html
+  	# MesoAm-Endemic-Quercus-Richness_leaflet_map.html
 
 
 ################################################################################
@@ -21,13 +21,12 @@
 ################################################################################
 
 my.packages <- c("leaflet","raster","sp","rgeos","dplyr","rgdal",
-	"RColorBrewer","tidyverse","rnaturalearth", "rnaturalearthdata", "rnaturalhires")
+	"RColorBrewer","tidyverse","rnaturalearth", "rnaturalearthdata", "devtools")
 
 install.packages(my.packages) # turn on to install current versions
+devtools::install_github("ropenscilabs/rnaturalearth")
 lapply(my.packages, require, character.only=TRUE)
 rm(my.packages)
-install.packages("devtools")
-devtools::install_github("ropenscilabs/rnaturalearth") #will be prompted to install rnaturalearthhires
 
 ################################################################################
 # Set working directory
