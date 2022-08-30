@@ -651,6 +651,7 @@ if(!dir.exists(file.path(main_dir,"inputs","raw_occurrence","sernec_raw")))
 # Move all the folders you downloaded into the "sernec_raw" folder
 
 # pulls the "occurrences.csv" from each genus folder, for compilation
+# only run if you pulled more than one genus 
 file_list <- list.files(file.path(main_dir,"inputs","raw_occurrence","sernec_raw"),
                         pattern = "SymbOutput", full.names = T)
 file_dfs <- lapply(file_list, function(i){
@@ -661,6 +662,12 @@ for(file in seq_along(file_dfs)){
   sernec_raw <- rbind(sernec_raw, file_dfs[[file]])
 }
 nrow(sernec_raw) #235775
+
+# read in raw occurrence points if only one genus 
+sernec_raw <- read.csv(file.path(main_dir,"inputs","raw_occurrence","sernec_raw",
+                                  "points_data.csv"),
+                        colClasses = "character", na.strings=c("", "NA"), strip.white=T, fileEncoding="UTF-8")
+nrow(sernec_raw) #161765
 
 ### standardize column names
 
