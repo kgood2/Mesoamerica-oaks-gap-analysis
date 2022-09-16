@@ -92,13 +92,13 @@ for(i in 1:length(spp.all)){
   ## palette based on database
   # set database as factor and order appropriately
   spp.now$database <- factor(spp.now$database,
-                             levels = c("Maricela","PMA","GBIF","US_Herbaria","iDigBio","GT_USCG","Herbario_TEFH_Hondouras","IUCN_RedList","El_Salvador","Base_Quercus"))
+                             levels = c("BIEN","Maricela","PMA","GBIF","US_Herbaria","iDigBio","GT_USCG","Herbario_TEFH_Hondouras","IUCN_RedList","El_Salvador","Base_Quercus"))
   spp.now <- spp.now %>% arrange(desc(database))
   # create color palette
-  # pink, light green, orange, bright green, blue, yellow, purple, dusty green, teal, dark blue-purple
-  colors <- c("#ffc0cb","#a8ee90", "#c9a467","#48b06c","#2f68d4","#c1c70c","#9279a6","#7d9e77","#27abb0","#432194")
+  # slate gray, pink, light green, orange, bright green, blue, yellow, purple, dusty green, teal, dark blue-purple
+  colors <- c("#708090","#ffc0cb","#a8ee90", "#c9a467","#48b06c","#2f68d4","#c1c70c","#9279a6","#7d9e77","#27abb0","#432194")
   database.pal <- colorFactor(palette=colors,
-                              levels=c("Maricela","PMA","GBIF","US_Herbaria","iDigBio","GT_USCG","Herbario_TEFH_Hondouras","IUCN_RedList","El_Savador","Base_Quercus"))
+                              levels=c("BIEN","Maricela","PMA","GBIF","US_Herbaria","iDigBio","GT_USCG","Herbario_TEFH_Hondouras","IUCN_RedList","El_Savador","Base_Quercus"))
   
   # create map
   map <- leaflet() %>%
