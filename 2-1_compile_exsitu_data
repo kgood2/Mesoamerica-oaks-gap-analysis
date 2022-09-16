@@ -411,7 +411,7 @@ all_data6$genus_species <- paste(all_data6$genus_new,all_data6$species_new)
 
 # read in target taxa list
 taxon_list <- read.csv(file.path(main_dir, "inputs", "taxa_list",
-  "target_species_with_syn.csv"),
+  "target_taxa_with_syn.csv"),
   header = T, na.strings = c("","NA"),colClasses = "character")
 taxon_list <- taxon_list %>%
   select(taxon_name,taxon_name_acc,species_name_acc,list,rl_year,rl_category)
