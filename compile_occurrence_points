@@ -349,7 +349,7 @@ geo_pts <- geo_pts %>% arrange(geo_pts$coordinateUncertaintyInMeters)
 geo_pts <- geo_pts %>% arrange(desc(year))
   # sort by dataset
 geo_pts$database <- factor(geo_pts$database,
-  levels = c("Maricela","PMA","GBIF","US_Herbaria","iDigBio","GT_USCG","Herbario_TEFH_Hondouras","IUCN_RedList","El_Salvador","Base_Quercus"))
+  levels = c("BIEN","Maricela","PMA","GBIF","US_Herbaria","iDigBio","GT_USCG","Herbario_TEFH_Hondouras","IUCN_RedList","El_Salvador","Base_Quercus"))
 geo_pts <- geo_pts %>% arrange(database)
 
 # remove duplicates
