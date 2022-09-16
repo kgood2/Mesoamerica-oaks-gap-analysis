@@ -43,10 +43,11 @@ lapply(my.packages, require, character.only=TRUE)
 
 # either set manually:
 #main_dir <- "/Volumes/GoogleDrive/My Drive/Conservation Consortia/R Training/occurrence_points"
+main_dir <- "/Volumes/GoogleDrive-103729429307302508433/Shared drives/Global Tree Conservation Program/4. GTCP_Projects/Gap Analyses/Mesoamerican Oak Gap Analysis/3. In situ/occurrence_points"
 #script_dir <- "./Documents/GitHub/OccurrencePoints/scripts"
 
 # or use 0-1_set_workingdirectory.R script:
-source("./Documents/GitHub/OccurrencePoints/scripts/0-1_set_workingdirectory.R")
+#source("./Documents/GitHub/OccurrencePoints/scripts/0-1_set_workingdirectory.R")
 #source("scripts/0-1_set_workingdirectory.R")
 
 ################################################################################
@@ -84,28 +85,16 @@ if(dir.exists(file.path(main_dir, "outputs", out.fld.nm)))
 # list of species files to iterate
 all.spp.files <- list.files(path=file.path(main_dir, "outputs",
   "spp_raw_points"), ignore.case=FALSE, full.names=FALSE, recursive=TRUE)
-  ## can either just run all species...
-#spp_list <- file_path_sans_ext(all.spp.files)
-  ## ...or select the first few...
 #all.spp.files <- all.spp.files[1:20]
-  ## ...or select specific species...
-#spp_list <- c("Malus_sieversii","Malus_spontanea","Quercus_acerifolia",
-#              "Quercus_arkansana","Quercus_austrina","Quercus_boyntonii",
-#              "Quercus_georgiana","Quercus_havardii","Quercus_oglethorpensis",
-#              "Quercus_pontica","Ulmus_chenmoui","Ulmus_elongata","Ulmus_gaussenii")
-  ## ...or select using a variable in the species list CSV...
-taxon_list <- read.csv(file.path(main_dir,"inputs","taxa_list",
-  "target_species_with_syn.csv"), header = T, na.strings = c("","NA"),
-  colClasses = "character")
-taxon_list$num_latlong_records <- as.numeric(taxon_list$num_latlong_records)
-target_spp <- taxon_list %>% filter(grepl("^MAP",map_flag) &
-                                    num_latlong_records > 2)
-spp_list <- gsub(" ","_",target_spp$species_name_acc)
+spp_list <- file_path_sans_ext(all.spp.files)
+  # or can choose specific species
+#spp_list <- c("Magnolia_brasiliensis","Magnolia_boliviana","Magnolia_arcabucoana","Magnolia_angustioblonga")#"Magnolia_calimaensis")
 spp_list
 
 # start a table to add summary of results for each species
 summary_tbl <- data.frame(species_name_acc = "start", total_pts = "start",
-  unflagged_pts = "start", .cen = "start", .urb = "start", .inst = "start",
+  unflagged_pts = "start", .cen = "start", #.urb = "start",
+  .inst = "start",
   .con = "start", .outl = "start", .gtsnative = "start", .rlnative = "start",
   .rlintroduced = "start", .yr1950 = "start", .yr1980 = "start",
   .yrna = "start", stringsAsFactors=F)
@@ -116,10 +105,11 @@ summary_tbl <- data.frame(species_name_acc = "start", total_pts = "start",
     "basisOfRecord", "establishmentMeans","decimalLatitude", "decimalLongitude",
     "coordinateUncertaintyInMeters", "geolocationNotes", "localityDescription",
     "county", "stateProvince", "countryCode_standard",
-    "datasetName", "publisher", "rightsHolder", "license", "nativeDatabaseID",
-    "references", "informationWithheld", "issue", "taxon_name_full", "list", "UID",
+    "datasetName", "publisher", "nativeDatabaseID", "references",
+    "informationWithheld", "issue", "taxon_name_full", "list", "UID",
     "country.name", "country.iso_a2", "country.iso_a3", "country.continent",
-    ".cen",".urb",".inst",".con",".outl",".gtsnative",".rlnative",
+    ".cen",#".urb",
+    ".inst",".con",".outl",".gtsnative",".rlnative",
     ".rlintroduced",".yr1950",".yr1980",".yrna")
 
 # iterate through each species file to flag suspect points
@@ -127,6 +117,7 @@ cat("Starting ", "target ", "taxa (", length(spp_list), " total)", ".\n\n",
   sep="")
 
 for (i in 1:length(spp_list)){
+  #i <- 1 #turn on to test loop for one species (and skip above line)
   f.nm <- spp_list[i]
 
   # bring in records
@@ -144,7 +135,7 @@ for (i in 1:length(spp_list)){
   # species native country distribution list from GTS
   s.nd.gts.l <- unique(unlist(strsplit(native_dist$gts_native_dist_iso2c[
     native_dist$species_name_acc==gsub("_"," ", f.nm)], "; ")))
-  if(!is.na(s.nd.gts.l)){
+  if(!is.na(s.nd.gts.l[[1]])){
   ## flag records where GTS country doesn't match record's coordinate location
   eo.post <- eo.post %>% mutate(.gtsnative=(ifelse(
     country.iso_a2 %in% s.nd.gts.l, TRUE, FALSE)))
@@ -155,7 +146,7 @@ for (i in 1:length(spp_list)){
   # species native country distribution list from RL
   s.nd.rln.l <- unique(unlist(strsplit(native_dist$rl_native_dist_iso2c[
     native_dist$species_name_acc==gsub("_"," ", f.nm)], "; ")))
-  if(!is.na(s.nd.rln.l)){
+  if(!is.na(s.nd.rln.l[[1]])){
   ## flag records where RL country doesn't match record's coordinate location
   eo.post <- eo.post %>% mutate(.rlnative=(ifelse(
     country.iso_a2 %in% s.nd.rln.l, TRUE, FALSE)))
@@ -166,7 +157,7 @@ for (i in 1:length(spp_list)){
   # species introduced country distribution list from RL
   s.nd.rli.l <- unique(unlist(strsplit(native_dist$rl_introduced_dist_iso2c[
     native_dist$species_name_acc==gsub("_"," ", f.nm)], "; ")))
-  if(!is.na(s.nd.rli.l)){
+  if(!is.na(s.nd.rli.l[[1]])){
   ## flag records where RL introduced country does match record's coord location
   eo.post <- eo.post %>% mutate(.rlintroduced=(ifelse(
     country.iso_a2 %in% s.nd.rli.l, FALSE, TRUE)))
@@ -193,15 +184,16 @@ for (i in 1:length(spp_list)){
     tests = c("centroids","institutions")
   )
   # adding urban area test separately because won't work for just 1 point
-  if(nrow(eo.df)<2){
-    eo.post2$.urb <- NA
-  } else {
-    eo.post2 <- as.data.frame(eo.post2)
-    flag_urb <- cc_urb(eo.post2,
-      lon = "decimalLongitude",lat = "decimalLatitude",
-      ref = urban.poly, value = "flagged")
-    eo.post2$.urb <- flag_urb
-  }
+  #if(nrow(eo.df)<2){
+  #  eo.post2$.urb <- NA
+  #  print("Speices with fewer than 2 records will not be tested.")
+  #} else {
+  #  eo.post2 <- as.data.frame(eo.post2)
+  #  flag_urb <- cc_urb(eo.post2,
+  #    lon = "decimalLongitude",lat = "decimalLatitude",
+  #    ref = urban.poly, value = "flagged")
+  #  eo.post2$.urb <- flag_urb
+  #}
   # for some reason the "sea" flag isn't working in the above function...
   #    adding here separately
   # actually, found it flags a lot on islands, etc. Skipping for now.
@@ -237,7 +229,8 @@ for (i in 1:length(spp_list)){
   eo.post3 <- eo.post2 %>% dplyr::select(all_of(c.nms))
   # df of unflagged points
   unflagged <- eo.post3 %>%
-    filter(.cen & .urb & .inst & .con & .outl & .yr1950 & .yr1980 & .yrna &
+    filter(.cen & #.urb &
+       .inst & .con & .outl & .yr1950 & .yr1980 & .yrna &
       (.gtsnative | is.na(.gtsnative)) &
       (.rlnative  | is.na(.rlnative)) &
       (.rlintroduced | is.na(.rlintroduced)) &
@@ -250,7 +243,7 @@ for (i in 1:length(spp_list)){
     total_pts = nrow(eo.post3),
     unflagged_pts = nrow(unflagged),
     .cen = sum(!eo.post3$.cen),
-    .urb = sum(!eo.post3$.urb),
+    #.urb = sum(!eo.post3$.urb),
     .inst = sum(!eo.post3$.inst),
     .con = sum(!eo.post3$.con),
     .outl = sum(!eo.post3$.outl),
