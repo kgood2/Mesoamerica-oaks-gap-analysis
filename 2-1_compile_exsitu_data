@@ -188,6 +188,10 @@ all_data <- tidyr::unite(all_data,"num_alive", c("num_alive","no_alive"),
 all_data <- tidyr::unite(all_data,"notes", c("notes","note","Notes","notes_1","notes_2","notes_3",
                           "notes_4"),
                          sep=";",remove=T,na.rm=T)
+all_data <- tidyr::unite(all_data,"num_individuals", c("num_individuals","no_plants"),
+                         sep=";",remove=T,na.rm=T)
+all_data <- tidyr::unite(all_data,"voucher", c("voucher","voucherlist","vouchers"),
+                         sep=";",remove=T,na.rm=T)
 ## IF NEEDED: remove unused columns or rename columns
 unique(all_data$condition) # make sure nothing is "dead" or "removed"
 all_data <- all_data[ , -which(names(all_data) %in%
