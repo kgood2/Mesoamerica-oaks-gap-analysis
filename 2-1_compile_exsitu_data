@@ -184,7 +184,7 @@ all_data <- tidyr::unite(all_data,"locality", c("locality","locality_details","l
 all_data <- tidyr::unite(all_data,"num_alive", c("num_alive","no_alive"),
                          sep=";",remove=T,na.rm=T)
 all_data <- tidyr::unite(all_data,"notes", c("notes","note","Notes","notes_1","notes_2","notes_3",
-                          "notes_4"),
+                          "notes_4","orig_notes","site_notes"),
                          sep=";",remove=T,na.rm=T)
 all_data <- tidyr::unite(all_data,"voucher", c("voucher","voucherlist","vouchers"),
                          sep=";",remove=T,na.rm=T)
@@ -192,7 +192,7 @@ all_data <- tidyr::unite(all_data,"municipality", c("municipality","other_region
                          sep=";",remove=T,na.rm=T)
 all_data <- tidyr::unite(all_data,"state", c("state","maj_region"),
                          sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"taxon_full_name", c("taxon_full_name","sp_full_name","ï..sp_full_name",ï..taxon_full_name"),
+all_data <- tidyr::unite(all_data,"taxon_full_name", c("taxon_full_name","sp_full_name","ï..sp_full_name",ï..taxon_full_name","taxon_name"),
                          sep=";",remove=T,na.rm=T)
 all_data <- tidyr::unite(all_data,"garden_loc", c("garden_loc","loc","garden_loc_campus","garden_lat","garden_long"),
                          sep=";",remove=T,na.rm=T)
@@ -200,6 +200,21 @@ all_data <- tidyr::unite(all_data,"habitat", c("habitat","habitat2"),
                          sep=";",remove=T,na.rm=T)
 all_data <- tidyr::unite(all_data,"name_determ", c("name_determ","id_by","id_notes","uncert_id"),
                          sep=";",remove=T,na.rm=T)
+all_data <- tidyr::unite(all_data,"common_name", c("common_name","commonname"),
+                         sep=";",remove=T,na.rm=T)
+all_data <- tidyr::unite(all_data,"coord_prec", c("coord_prec","coord_precision"),
+                         sep=";",remove=T,na.rm=T)
+all_data <- tidyr::unite(all_data,"infra_name", c("infra_name","intra_name","specific_name"),
+                        sep=";",remove=T,na.rm=T)
+all_data <- tidyr::unite(all_data,"infra_rank", c("infra_rank","intra_rank","specific_rank"),
+                        sep=";",remove=T,na.rm=T)
+all_data <- tidyr::unite(all_data,"orig_source", c("orig_source","orig_source.1","donor_name","donor","source","source2"),
+                         sep=";",remove=T,na.rm=T)
+all_data <- tidyr::unite(all_data,"hybrid", c("hybrid","hybrid.1"),
+                         sep=";",remove=T,na.rm=T)
+all_data <- tidyr::unite(all_data,"coll_num", c("coll_num","coll_no"),
+                         sep=";",remove=T,na.rm=T)
+
 
 ## IF NEEDED: remove unused columns or rename columns
 # unique(all_data$condition) # make sure nothing is "dead" or "removed". Don't worry about this now. Will remove later in script 
@@ -211,7 +226,7 @@ colnames(all_data)[colnames(all_data)=="name_determ"] <- "taxon_det"
 ### CHECK THINGS OUT ###
 sort(colnames(all_data)); ncol(all_data)
 # There should be max of 31 columns, including no more than:
-# acc_num,assoc_sp,coll_name,coll_num,coll_year,country,county,cultivar,
+# acc_num,assoc_sp,coll_name,coll_year,country,county,cultivar,
 # filename,garden_loc,genus,germ_type,hybrid,infra_name,infra_rank,inst_short,
 # lin_num,locality,municipality,notes,num_indiv,orig_lat,orig_long,orig_source,
 # prov_type,rec_as,species,state,submission_year,taxon_det,taxon_full_name
