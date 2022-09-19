@@ -165,7 +165,7 @@ sort(colnames(all_data))
 ##  mistakes were made when manually editing column names)
 all_data <- tidyr::unite(all_data,"inst_short", c("inst_short","ï..inst_short"),
                          sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"num_indiv", c("num_indiv","num_plants","no_plants"),
+all_data <- tidyr::unite(all_data,"num_indiv", c("num_indiv","num_plants","no_plants","num_alive", "no_alive"),
                          sep=";",remove=T,na.rm=T)
 all_data <- tidyr::unite(all_data,"coll_year", c("coll_year","acq_year","aqu_year","aqu_yr","coll_yr"),
                          sep=";",remove=T,na.rm=T)
@@ -180,8 +180,6 @@ all_data <- tidyr::unite(all_data,"county", c("county","county.1","min_region"),
 all_data <- tidyr::unite(all_data,"lin_num", c("lin_num","lin_no"),
                          sep=";",remove=T,na.rm=T)
 all_data <- tidyr::unite(all_data,"locality", c("locality","locality_details","locality2","locallity"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"num_alive", c("num_alive","no_alive"),
                          sep=";",remove=T,na.rm=T)
 all_data <- tidyr::unite(all_data,"notes", c("notes","note","Notes","notes_1","notes_2","notes_3",
                           "notes_4","orig_notes","site_notes"),
