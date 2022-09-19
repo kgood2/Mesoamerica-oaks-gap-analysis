@@ -204,7 +204,7 @@ all_data <- tidyr::unite(all_data,"name_determ", c("name_determ","id_by","id_not
                          sep=";",remove=T,na.rm=T)
 
 ## IF NEEDED: remove unused columns or rename columns
-unique(all_data$condition) # make sure nothing is "dead" or "removed"
+# unique(all_data$condition) # make sure nothing is "dead" or "removed". Don't worry about this now. Will remove later in script 
 all_data <- all_data[ , -which(names(all_data) %in%
                                  c("genus_species","condition","coord_precision","dataset_year","habitat",
                                    "private"))]
