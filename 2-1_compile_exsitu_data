@@ -192,7 +192,7 @@ all_data <- tidyr::unite(all_data,"municipality", c("municipality","other_region
                          sep=";",remove=T,na.rm=T)
 all_data <- tidyr::unite(all_data,"state", c("state","maj_region"),
                          sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"taxon_full_name", c("taxon_full_name","sp_full_name","ï..sp_full_name",ï..taxon_full_name","taxon_name"),
+all_data <- tidyr::unite(all_data,"taxon_full_name", c("taxon_full_name","sp_full_name","ï..sp_full_name","ï..taxon_full_name","taxon_name"),
                          sep=";",remove=T,na.rm=T)
 all_data <- tidyr::unite(all_data,"garden_loc", c("garden_loc","loc","garden_loc_campus","garden_lat","garden_long"),
                          sep=";",remove=T,na.rm=T)
