@@ -214,6 +214,8 @@ all_data <- tidyr::unite(all_data,"hybrid", c("hybrid","hybrid.1"),
                          sep=";",remove=T,na.rm=T)
 all_data <- tidyr::unite(all_data,"coll_num", c("coll_num","coll_no"),
                          sep=";",remove=T,na.rm=T)
+all_data <- tidyr::unite(all_data,"inst_name", c("inst_name","isnt_name"),
+                         sep=";",remove=T,na.rm=T)
 
 
 ## IF NEEDED: remove unused columns or rename columns
