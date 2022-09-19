@@ -171,6 +171,23 @@ all_data <- tidyr::unite(all_data,"coll_year", c("coll_year","acq_year"),
                          sep=";",remove=T,na.rm=T)
 all_data <- tidyr::unite(all_data,"cultivar", c("cultivar","trade_name"),
                          sep=" / ",remove=T,na.rm=T)
+all_data <- tidyr::unite(all_data,"acc_num", c("acc_num","acc_no"),
+                         sep=";",remove=T,na.rm=T)
+all_data <- tidyr::unite(all_data,"acc_date", c("acc_date","Accession.Date"),
+                         sep=";",remove=T,na.rm=T)
+all_data <- tidyr::unite(all_data,"coll_year", c("coll_year","coll_yr"),
+                         sep=";",remove=T,na.rm=T)
+all_data <- tidyr::unite(all_data,"county", c("county","county.1"),
+                         sep=";",remove=T,na.rm=T)
+all_data <- tidyr::unite(all_data,"lin_num", c("lin_num","lin_no"),
+                         sep=";",remove=T,na.rm=T)
+all_data <- tidyr::unite(all_data,"locality", c("locality","locality_details","locality2","locallity"),
+                         sep=";",remove=T,na.rm=T)
+all_data <- tidyr::unite(all_data,"num_alive", c("num_alive","no_alive"),
+                         sep=";",remove=T,na.rm=T)
+all_data <- tidyr::unite(all_data,"notes", c("notes","note","Notes","notes_1","notes_2","notes_3",
+                          "notes_4"),
+                         sep=";",remove=T,na.rm=T)
 ## IF NEEDED: remove unused columns or rename columns
 unique(all_data$condition) # make sure nothing is "dead" or "removed"
 all_data <- all_data[ , -which(names(all_data) %in%
