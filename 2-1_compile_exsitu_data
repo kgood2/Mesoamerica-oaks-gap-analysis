@@ -286,14 +286,14 @@ nrow(all_data2); nrow(all_data3) #95244 ; 45057
 
 ### CHECK OUT THE HYBRID COLUMN ###
 # standardize a bit
-sort(unique(all_data3$hybrid))
+# sort(unique(all_data3$hybrid))
 # all_data3$hybrid <- mgsub(all_data3$hybrid,
                           # c("_","^1$","XH","Hybrid"," hybrid","\\*","^A$","^H$","X","^H ","Ex ","ExE","^\\("),
                           # " x ",fixed=F)
 # all_data3$hybrid <- str_squish(all_data3$hybrid)
 # make sure everything has an " x " in it somewhere (important later)
 # all_data3$hybrid <- mgsub(all_data3$hybrid,
-                          c("^hispanica$"),c("x hispanica"),fixed=F)
+                          # c("^hispanica$"),c("x hispanica"),fixed=F)
 
 # create concatenated taxon_full_name column
  all_data3 <- tidyr::unite(all_data3, "taxon_full_name_concat",
