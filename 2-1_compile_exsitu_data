@@ -232,8 +232,8 @@ sort(colnames(all_data)); ncol(all_data)
 # prov_type,rec_as,species,state,submission_year,taxon_det,taxon_full_name
 
 # fill in inst_short column with filename if none provided
-all_data$inst_short[all_data$inst_short==""] <-
-  all_data$filename[all_data$inst_short==""]
+all_data$inst_short[is.na(all_data$inst_short)] <-
+  all_data$filename[is.na(all_data$inst_short)]
 nrow(all_data) #96841
 # remove rows with no inst_short
 all_data <- all_data[which(all_data$inst_short!=""),]
