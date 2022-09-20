@@ -67,7 +67,7 @@ read.exsitu.csv <- function(path,submission_year){
     # add file name as column, to record home institution for each record
     df$filename <- rep(file_list[file],nrow(df))
     # remove file path portion
-    df$filename <- mgsub(df$filename,c(paste0(path,"/"),".csv"),"")
+    df$filename <- (df$filename,c(paste0(path,"/"),".csv"),"")
     # add year of submission
     df$submission_year <- submission_year
     # remove extra blank columns
@@ -287,19 +287,18 @@ nrow(all_data2); nrow(all_data3) #95244 ; 45057
 ### CHECK OUT THE HYBRID COLUMN ###
 # standardize a bit
 sort(unique(all_data3$hybrid))
-all_data3 <- mgsub(all_data3$hybrid, c("species","unknown"), NA)
-all_data3$hybrid <- mgsub(all_data3$hybrid,
-                          c("_","^1$","XH","Hybrid"," hybrid","\\*","^A$","^H$","X","^H ","Ex ","ExE","^\\("),
-                          " x ",fixed=F)
-all_data3$hybrid <- str_squish(all_data3$hybrid)
+# all_data3$hybrid <- mgsub(all_data3$hybrid,
+                          # c("_","^1$","XH","Hybrid"," hybrid","\\*","^A$","^H$","X","^H ","Ex ","ExE","^\\("),
+                          # " x ",fixed=F)
+# all_data3$hybrid <- str_squish(all_data3$hybrid)
 # make sure everything has an " x " in it somewhere (important later)
-all_data3$hybrid <- mgsub(all_data3$hybrid,
+# all_data3$hybrid <- mgsub(all_data3$hybrid,
                           c("^hispanica$"),c("x hispanica"),fixed=F)
 
 # create concatenated taxon_full_name column
-all_data3 <- tidyr::unite(all_data3, "taxon_full_name_concat",
-                          c(genus,hybrid,species,infra_rank,infra_name,cultivar), sep=" ", remove=F,
-                          na.rm=T)
+ all_data3 <- tidyr::unite(all_data3, "taxon_full_name_concat",
+                          # c(genus,hybrid,species,infra_rank,infra_name,cultivar), sep=" ", remove=F,
+                          # na.rm=T)
 
 # when blank, fill taxon_full_name column with concatenated full name
 all_data3[is.na(all_data3$taxon_full_name),]$taxon_full_name <-
@@ -307,37 +306,37 @@ all_data3[is.na(all_data3$taxon_full_name),]$taxon_full_name <-
 unique(all_data3$taxon_full_name)
 
 # standardize common hybrid signifiers in taxon_full_name
-all_data3$taxon_full_name <- mgsub(all_data3$taxon_full_name,
+# all_data3$taxon_full_name <- mgsub(all_data3$taxon_full_name,
                                    c(" A ","_"," X ","\\*")," x ",fixed=T)
-all_data3$taxon_full_name <- str_squish(all_data3$taxon_full_name)
+# all_data3$taxon_full_name <- str_squish(all_data3$taxon_full_name)
 
 # write copy of all data
 # select columns
-all_data_export1 <- all_data3 %>%
-  dplyr::select(inst_short,taxon_full_name,genus,species,infra_rank,infra_name,
-                hybrid,cultivar,prov_type,orig_lat,orig_long,country,state,municipality,
-                locality,assoc_sp,acc_num,lin_num,orig_source,rec_as,num_indiv,germ_type,
-                garden_loc,coll_num,coll_name,coll_year,taxon_det,notes,taxon_full_name_orig)
-write.csv(all_data_export1, file.path(main_dir,"outputs",
-                                      paste0("ExSitu_AllDataRaw_GenusFilterOnly_", Sys.Date(), ".csv")),row.names = F)
+# all_data_export1 <- all_data3 %>%
+  # dplyr::select(inst_short,taxon_full_name,genus,species,infra_rank,infra_name,
+                # hybrid,cultivar,prov_type,orig_lat,orig_long,country,state,municipality,
+                # locality,assoc_sp,acc_num,lin_num,orig_source,rec_as,num_indiv,germ_type,
+                # garden_loc,coll_num,coll_name,coll_year,taxon_det,notes,taxon_full_name_orig)
+# write.csv(all_data_export1, file.path(main_dir,"outputs",
+                                      # paste0("ExSitu_AllDataRaw_GenusFilterOnly_", Sys.Date(), ".csv")),row.names = F)
 
 # summary of genera (and submission year, if applicable) for each institution
-summary <- unique(data.frame(inst_short = all_data3$inst_short,
-                             genera = all_data3$genus
+# summary <- unique(data.frame(inst_short = all_data3$inst_short,
+                             # genera = all_data3$genus
                              #,submission_year = all_data3$submission_year
-))
-summary <- summary %>%
-  arrange(genera
+# ))
+# summary <- summary %>%
+  # arrange(genera
           #,submission_year
-  ) %>%
-  group_by(inst_short) %>%
-  mutate(genera = paste(genera,collapse = ", ")
-         #,submission_year = paste(submission_year,collapse = ", ")
-  ) %>%
-  ungroup() %>%
-  arrange(inst_short) %>%
-  distinct(inst_short,.keep_all=T)
-as.data.frame(summary)
+  # ) %>%
+  # group_by(inst_short) %>%
+  # mutate(genera = paste(genera,collapse = ", ")
+         # #,submission_year = paste(submission_year,collapse = ", ")
+  # ) %>%
+  # ungroup() %>%
+  # arrange(inst_short) %>%
+  # distinct(inst_short,.keep_all=T)
+# as.data.frame(summary)
 
 ################################################################################
 # 3. Further standardize taxon name, then keep data for target taxa only
