@@ -163,57 +163,57 @@ sort(colnames(all_data))
 #unique(all_data$filename[all_data$ï..taxon_full_name!=""])
 ## IF NEEDED: merge similar columns (you may not need to do this if no schema
 ##  mistakes were made when manually editing column names)
-all_data <- tidyr::unite(all_data,"inst_short", c("inst_short","ï..inst_short"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"num_indiv", c("num_indiv","num_plants","no_plants","num_alive", "no_alive"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"coll_year", c("coll_year","acq_year","aqu_year","aqu_yr","coll_yr"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"cultivar", c("cultivar","trade_name"),
-                         sep=" / ",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"acc_num", c("acc_num","acc_no"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"acc_date", c("acc_date","Accession.Date"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"county", c("county","county.1","min_region"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"lin_num", c("lin_num","lin_no"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"locality", c("locality","locality_details","locality2","locallity"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"notes", c("notes","note","Notes","notes_1","notes_2","notes_3",
-                          "notes_4","orig_notes","site_notes"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"voucher", c("voucher","voucherlist","vouchers"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"municipality", c("municipality","other_region"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"state", c("state","maj_region"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"taxon_full_name", c("taxon_full_name","sp_full_name","ï..sp_full_name","ï..taxon_full_name","taxon_name"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"garden_loc", c("garden_loc","loc","garden_loc_campus","garden_lat","garden_long"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"habitat", c("habitat","habitat2"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"name_determ", c("name_determ","id_by","id_notes","uncert_id"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"common_name", c("common_name","commonname"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"coord_prec", c("coord_prec","coord_precision"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"infra_name", c("infra_name","intra_name","specific_name"),
-                        sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"infra_rank", c("infra_rank","intra_rank","specific_rank"),
-                        sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"orig_source", c("orig_source","orig_source.1","donor_name","donor","source","source2"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"hybrid", c("hybrid","hybrid.1"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"coll_num", c("coll_num","coll_no"),
-                         sep=";",remove=T,na.rm=T)
-all_data <- tidyr::unite(all_data,"inst_name", c("inst_name","isnt_name"),
-                         sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"inst_short", c("inst_short","ï..inst_short"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"num_indiv", c("num_indiv","num_plants","no_plants","num_alive", "no_alive"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"coll_year", c("coll_year","acq_year","aqu_year","aqu_yr","coll_yr"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"cultivar", c("cultivar","trade_name"),
+                         # sep=" / ",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"acc_num", c("acc_num","acc_no"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"acc_date", c("acc_date","Accession.Date"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"county", c("county","county.1","min_region"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"lin_num", c("lin_num","lin_no"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"locality", c("locality","locality_details","locality2","locallity"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"notes", c("notes","note","Notes","notes_1","notes_2","notes_3",
+                          # "notes_4","orig_notes","site_notes"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"voucher", c("voucher","voucherlist","vouchers"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"municipality", c("municipality","other_region"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"state", c("state","maj_region"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"taxon_full_name", c("taxon_full_name","sp_full_name","ï..sp_full_name","ï..taxon_full_name","taxon_name"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"garden_loc", c("garden_loc","loc","garden_loc_campus","garden_lat","garden_long"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"habitat", c("habitat","habitat2"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"name_determ", c("name_determ","id_by","id_notes","uncert_id"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"common_name", c("common_name","commonname"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"coord_prec", c("coord_prec","coord_precision"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"infra_name", c("infra_name","intra_name","specific_name"),
+                        # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"infra_rank", c("infra_rank","intra_rank","specific_rank"),
+                        # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"orig_source", c("orig_source","orig_source.1","donor_name","donor","source","source2"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"hybrid", c("hybrid","hybrid.1"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"coll_num", c("coll_num","coll_no"),
+                         # sep=";",remove=T,na.rm=T)
+# all_data <- tidyr::unite(all_data,"inst_name", c("inst_name","isnt_name"),
+                         # sep=";",remove=T,na.rm=T)
 
 
 ## IF NEEDED: remove unused columns or rename columns
@@ -241,11 +241,11 @@ nrow(all_data) #96841
 ## IF NEEDED: remove duplicates in network datasets (e.g., PCN) if institution
 ##   submitted their own data separately
 # Network 1
-network_rm <- c("MissouriBG","RanchoSantaAnaBG","MortonArb")
-all_data <- remove.network.dups(all_data,network_rm,"PCNQuercus")
+# network_rm <- c("MissouriBG","RanchoSantaAnaBG","MortonArb")
+# all_data <- remove.network.dups(all_data,network_rm,"PCNQuercus")
 # Network 2
-network_rm <- c("HackfallsArb")
-all_data <- remove.network.dups(all_data,network_rm,"CultivatedOaks")
+# network_rm <- c("HackfallsArb")
+# all_data <- remove.network.dups(all_data,network_rm,"CultivatedOaks")
 nrow(all_data) #95244
 
 ### CHECK ALL INSTITUTIONS ARE HERE ###
